@@ -5,9 +5,8 @@ include <polyround.scad>;
  * Feel free to edit this section
  * ALWAYS CHECK THE MODEL BEFORE PRINTING!!!
  */
-strength = 3; // Wall thickness
-angle=30; // Angle of the display 
-// WARNING: Some angle break the corner!!!
+strength = 3;   // Wall thickness
+angle=30;       // Angle of the display - WARNING: Some angle break the corner!!!
 angleSupport=5; // Strength of the support between the display plate and the plate with the logo
 enderLogo=true; // Enable/Disable the ender logo on the front panel
 
@@ -30,7 +29,7 @@ modelType=0;
  * Model
  * Changes in this section might break stuff!
  */
-        
+
 module ExtrutionEndMount(){
     rotate([90,0,0]){
         cylinder(r=3.5, h=10);
@@ -46,17 +45,16 @@ module ExtrutionEndMount(){
 }
 
 module MountingPlate(){
-    $fs=0.5; 
+    $fs=0.5;
     difference(){
         translate([0,-strength,0])
             cube([110,strength,50]);
-        
 
             translate([29.5,0,20]){
                 color("red")
                     ExtrutionEndMount();
             }
-            
+
             if(enderLogo){
                 translate([74,-1,23])
                     scale([0.6,2,0.6])
@@ -90,18 +88,18 @@ module DisplayPlate(){
                         rotate([-90,0,0])
                             cylinder(d=10,h=30);
                 }
-                
+
            translate([7.0,0,9.5])
                 color("black")
                     cube([79,30,52]);
-                
+
            translate([50,30,90-11])
                 rotate([90,0,0])
                     cylinder(d=6,h=30);
         }
     }
-    
-    $fs=0.5; 
+
+    $fs=0.5;
     translate([8.5,0,5]){
         translate([2.5,0,2.5])
         rotate([90,0,0])
@@ -109,33 +107,33 @@ module DisplayPlate(){
                     cylinder(d=outerDiameter,h=mountHeight);
                     cylinder(d=holeDiameter,h=12);
         }
-        
+
         translate([90.5,0,2.5])
         rotate([90,0,0])
         difference(){
                     cylinder(d=outerDiameter,h=mountHeight);
                     cylinder(d=holeDiameter,h=12);
         }
-        
+
         translate([90.5,0,67.5])
         rotate([90,0,0])
         difference(){
                     cylinder(d=outerDiameter,h=mountHeight);
                     cylinder(d=holeDiameter,h=12);
         }
-        
+
         translate([2.5,0,67.5])
         rotate([90,0,0])
         difference(){
                     cylinder(d=outerDiameter,h=mountHeight);
                     cylinder(d=holeDiameter,h=12);
         }
-        
+
        translate([0,-mountHeight-5.7,0]){
             //Display();
-            
+
        }
-       
+
        if(modelType == 0 || modelType == 3) {
            translate([50,strength,90-11])
                     rotate([90,0,0])
@@ -152,7 +150,7 @@ module Anchor(){
             rotate([0,-90,0])
                 linear_extrude(110)
                     polygon(polyRound(b));
-    
+
     b2=[[r2,0], [0,0], [-sin(angle)*r2,-cos(angle)*r2]];
     translate([110,-r,0])
             rotate([0,-90,0])
@@ -176,12 +174,12 @@ module Display(){
                 rotate([-90,0,0])
                     cylinder(d=7,h=30);
     }
-    
+
     color("black")
          translate([65,0,79])
             rotate([-90,0,0])
                 cylinder(d=12,h=11.2);
-    
+
     color("grey")
          translate([47,0,87-11])
                 cube([6,6.5,6]);
@@ -205,16 +203,3 @@ else if(modelType == 2) {
 else if(modelType == 3){
     DisplayPlate();
 }
-
-
-
-
-
-
-    
-    
-
-
-       
-  
-    
